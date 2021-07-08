@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t glaydson/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run glaydson/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t glaydsonvs/multi-client ./client
+  - docker build -t glaydsonvs/multi-nginx ./nginx
+  - docker build -t glaydsonvs/multi-server ./server
+  - docker build -t glaydsonvs/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push glaydsonvs/multi-client
+  - docker push glaydsonvs/multi-nginx
+  - docker push glaydsonvs/multi-server
+  - docker push glaydsonvs/multi-worker
