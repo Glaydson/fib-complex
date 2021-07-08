@@ -3,10 +3,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t glaydson/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t glaydsonvs/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run glaydson/react-test npm test -- --coverage
+  - docker run glaydsonvs/react-test npm test -- --coverage
 
 after_success:
   - docker build -t glaydsonvs/multi-client ./client
