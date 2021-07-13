@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Editar <code>src/App.js</code> and save to reload.
           </p>
           <Link to='/'>Home</Link>
           <Link to='/otherpage'>Other Page</Link>
